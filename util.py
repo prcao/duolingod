@@ -10,11 +10,11 @@ def remove_accents(old):
     Uses: regex.
     """
     new = old.lower()
-    new = re.sub(r'[àáâãäå]', 'a', new)
-    new = re.sub(r'[èéêë]', 'e', new)
-    new = re.sub(r'[ìíîï]', 'i', new)
-    new = re.sub(r'[òóôõö]', 'o', new)
-    new = re.sub(r'[ùúûü]', 'u', new)
+    new = re.sub(r'[àáāǎ]', 'a', new)
+    new = re.sub(r'[èéēě]', 'e', new)
+    new = re.sub(r'[ìíīǐ]', 'i', new)
+    new = re.sub(r'[òóǒō]', 'o', new)
+    new = re.sub(r'[ùúǔüūǖǘǚǜ]', 'u', new)
     return new
 
 def pinyin_equals(a, b):

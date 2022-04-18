@@ -82,36 +82,12 @@ while True:
         wait.until(EC.presence_of_all_elements_located(
             (By.CSS_SELECTOR, '.Mr3if._2OhdT')))
         
-        lesson = None
+        # get practice button
+        prac_btn = driver.find_element(By.XPATH, "//a[@data-test='global-practice']")
+        prac_btn.click()
 
-        while not lesson:
-            time.sleep(1)
-            available_lessons = driver.find_elements(By.CSS_SELECTOR, '.Mr3if._2OhdT')
-            for available_lesson in available_lessons:
-                crown = available_lesson.find_elements(
-                    By.XPATH, "..//div[@data-test='level-crown']")
-                if crown and crown[0].get_attribute('innerText') == '5':
-                    continue
-                if crown:
-                    print("CROWN LEVEL", crown[0].get_attribute('innerText'))
+        time.sleep(5)
 
-                legend_crown = available_lesson.find_elements(By.XPATH, "..//img[@src='https://d35aaqx5ub95lt.cloudfront.net/images/crowns/dc4851466463c85bbfcaaaaae18e1925.svg']")
-                if not legend_crown:
-                    lesson = available_lesson
-                    break
-
-            if not lesson:
-                html = driver.find_element_by_tag_name('html')
-                html.send_keys(Keys.PAGE_DOWN)
-            else:
-                ac.move_to_element(lesson).click().perform()
-
-
-        time.sleep(1)
-
-        print('starting')
-        start_btn = driver.find_element(By.XPATH, "//a[@data-test='start-button']")
-        start_btn.click()
         # lesson started!
         answer_cache = {}
         while True:
@@ -119,8 +95,8 @@ while True:
 
             # check if lesson is complete
             if driver.find_elements(
-                    By.XPATH, "//span[contains(text(),'Lesson Complete!')]"):
-                print(">>>>>>> Lesson complete!")
+                    By.XPATH, "//span[contains(text(),'Practice Complete!')]"):
+                print(">>>>>>> Practice complete!")
                 break
 
             # check if there is a green button to be clicked
